@@ -38,4 +38,12 @@ public class Field {
   public void setField(int[][] field) {
     this.field = field;
   }
+
+  public HashMap getDecoder() {
+    return decoder;
+  }
+
+  public void setDecoder(HashMap decoder) {
+    this.decoder = decoder;
+  }
 }
