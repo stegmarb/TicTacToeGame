@@ -15,7 +15,7 @@ public class FieldVisualizer {
     for (int i = 0; i < currentField.length; i++) {
       for (int j = 0; j < currentField[i].length; j++) {
         if (i != 0 && i != 11 && j == 0) {
-          System.out.print((i-1) + "" + decoder.get(currentField[i][j]));
+          System.out.print((i - 1) + "" + decoder.get(currentField[i][j]));
         } else {
           System.out.print(decoder.get(currentField[i][j]));
         }
@@ -24,11 +24,23 @@ public class FieldVisualizer {
     }
   }
 
-  public static void changeField(int column, int row, String player) {
+  public static void changeField(String column, String row, String player) {
+    int columnNum = Integer.parseInt(column);
+    int rowNum = Integer.parseInt(row);
     if (player.equals("p")) {
-    currentField[row+1][column*2+1] = 1;
-  } else if (player.equals("ai")){
-    currentField[row+1][column*2+1] = 0;
+      currentField[rowNum + 1][columnNum * 2 + 1] = 1;
+    } else if (player.equals("ai")) {
+      currentField[rowNum + 1][columnNum * 2 + 1] = 0;
+    }
+  }
+
+  public static boolean isPlaceTaken(String column, String row) {
+    int columnNum = Integer.parseInt(column);
+    int rowNum = Integer.parseInt(row);
+    if (currentField[columnNum*2-1][rowNum*2-1] == 4) {
+      return false;
+    } else {
+      return true;
     }
   }
 }
