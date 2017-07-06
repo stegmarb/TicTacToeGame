@@ -12,16 +12,18 @@ public class FieldVisualizer {
 
   public static void visualizeField() {
     System.out.println("  0 1 2 3 4 5 6 7 8 9 ");
+    System.out.println("  _ _ _ _ _ _ _ _ _ _");
     for (int i = 0; i < currentField.length; i++) {
       for (int j = 0; j < currentField[i].length; j++) {
-        if (i != 0 && i != 11 && j == 0) {
-          System.out.print((i - 1) + "" + decoder.get(currentField[i][j]));
+        if (j == 0) {
+          System.out.print(i + "|");
         } else {
-          System.out.print(decoder.get(currentField[i][j]));
+          System.out.print(decoder.get(currentField[i][j]) + "|");
         }
       }
       System.out.println();
     }
+    System.out.println("  ¯ ¯ ¯ ¯ ¯ ¯ ¯ ¯ ¯ ¯");
   }
 
   public static void changeField(String column, String row, String player) {
