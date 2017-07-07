@@ -1,5 +1,7 @@
 package service;
 
 public class GameLogic {
-  private FieldVisualizer currentField = new FieldVisualizer();
+  private static FieldVisualizer fieldVisualizer = new FieldVisualizer();
+
+
 }
