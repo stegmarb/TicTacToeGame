@@ -2,9 +2,7 @@ package service;
 
 import model.Field;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class FieldVisualizer {
 
@@ -26,7 +24,7 @@ public class FieldVisualizer {
       }
       System.out.println();
     }
-    System.out.println("  ¯ ¯ ¯ ¯ ¯ ¯ ¯ ¯ ¯ ¯");
+    System.out.println("  - - - - - - - - - -");
   }
 
   public static void changeField(String column, String row, String player) {
@@ -43,10 +41,8 @@ public class FieldVisualizer {
     int columnNum = Integer.parseInt(column);
     int rowNum = Integer.parseInt(row);
     if (currentField[rowNum][columnNum] == 0) {
-      System.out.println(false);
       return false;
     } else {
-      System.out.println(true);
       return true;
     }
   }
