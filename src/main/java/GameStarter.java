@@ -1,3 +1,4 @@
+import model.Field;
 import service.FieldVisualizer;
 
 import java.util.Scanner;
@@ -16,6 +17,7 @@ public class GameStarter {
       } else {
         FieldVisualizer.changeField(userCall.split(" ")[0], userCall.split(" ")[1], "p");
         FieldVisualizer.visualizeField();
+        System.out.println(FieldVisualizer.fiveInRow());
       }
     }
   }

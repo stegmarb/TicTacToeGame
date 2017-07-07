@@ -2,13 +2,16 @@ package service;
 
 import model.Field;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class FieldVisualizer {
 
   private static Field field = new Field();
   private static int[][] currentField = field.getField();
   private static HashMap decoder = field.getDecoder();
+  public static int count = 0;
 
   public static void visualizeField() {
     System.out.println("  0 1 2 3 4 5 6 7 8 9 ");
@@ -47,4 +50,118 @@ public class FieldVisualizer {
       return true;
     }
   }
+
+  public static boolean isNotAllowed(int column, int row) {
+    if (column < 0 || column > 9 || row < 0 || row > 9) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public static boolean fiveInRow() {
+    boolean finalAnswer = false;
+    boolean[] results = new boolean[4];
+    for (int i = 0; i < currentField.length; i++) {
+      for (int j = 0; j < currentField[i].length; j++) {
+        if (isThereSignHorizontal(j, i) || isThereSignVertical(j, i) || isThereSignNegativeDiagonal(j, i) || isThereSignPositiveDiagonal(j, i)) {
+          finalAnswer = true;
+        }
+      }
+    }
+    return finalAnswer;
+  }
+
+  public static boolean isPlayer(int column, int row) {
+    if (currentField[row][column] == 1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  public static boolean isThereSignHorizontal(int column, int row) {
+    int counter = 0;
+    boolean finalAnswer = false;
+    boolean[] result = new boolean[5];
+    for (int i = 0; i < 5; i++) {
+      if (isNotAllowed(column + i, row)) {
+        result[i] = false;
+      } else if (isPlayer(column + i, row)) {
+        result[i] = true;
+      } else {
+        result[i] = false;
+      }
+    }
+    for (int i = 0; i < result.length; i++) {
+      if (result[i]) {
+        counter++;
+      }
+    }
+    return counter == 5;
+  }
+
+  public static boolean isThereSignVertical(int column, int row) {
+    int counter = 0;
+    boolean finalAnswer = false;
+    boolean[] result = new boolean[5];
+    for (int i = 0; i < 5; i++) {
+      if (isNotAllowed(column, row + i)) {
+        result[i] = false;
+      } else if (isPlayer(column, row + i)) {
+        result[i] = true;
+      } else {
+        result[i] = false;
+      }
+    }
+    for (int i = 0; i < result.length; i++) {
+      if (result[i]) {
+        counter++;
+      }
+    }
+    return counter == 5;
+  }
+
+  public static boolean isThereSignPositiveDiagonal(int column, int row) {
+    int counter = 0;
+    boolean finalAnswer = false;
+    boolean[] result = new boolean[5];
+    for (int i = 0; i < 5; i++) {
+      if (isNotAllowed(column + i, row - i)) {
+        result[i] = false;
+      } else if (isPlayer(column + i, row - i)) {
+        result[i] = true;
+      } else {
+        result[i] = false;
+      }
+    }
+    for (int i = 0; i < result.length; i++) {
+      if (result[i]) {
+        counter++;
+      }
+    }
+    return counter == 5;
+  }
+
+  public static boolean isThereSignNegativeDiagonal(int column, int row) {
+    int counter = 0;
+    boolean finalAnswer = false;
+    boolean[] result = new boolean[5];
+    for (int i = 0; i < 5; i++) {
+      if (isNotAllowed(column + i, row + i)) {
+        result[i] = false;
+      } else if (isPlayer(column + i, row + i)) {
+        result[i] = true;
+      } else {
+        result[i] = false;
+      }
+    }
+    for (int i = 0; i < result.length; i++) {
+      if (result[i]) {
+        counter++;
+      }
+    }
+    return counter == 5;
+  }
 }
+
