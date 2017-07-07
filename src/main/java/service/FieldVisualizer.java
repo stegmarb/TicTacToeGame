@@ -34,7 +34,7 @@ public class FieldVisualizer {
     int rowNum = Integer.parseInt(row);
     if (player.equals("p")) {
       currentField[rowNum][columnNum] = 1;
-    } else if (player.equals("ai")) {
+    } else if (player.equals("c")) {
       currentField[rowNum][columnNum] = 2;
     }
   }
@@ -59,12 +59,12 @@ public class FieldVisualizer {
     }
   }
 
-  public static boolean fiveInRow() {
+  public static boolean fiveInRow(String player) {
     boolean finalAnswer = false;
     boolean[] results = new boolean[4];
     for (int i = 0; i < currentField.length; i++) {
       for (int j = 0; j < currentField[i].length; j++) {
-        if (isThereSignHorizontal(j, i) || isThereSignVertical(j, i) || isThereSignNegativeDiagonal(j, i) || isThereSignPositiveDiagonal(j, i)) {
+        if (isThereSignHorizontal(j, i, player) || isThereSignVertical(j, i, player) || isThereSignNegativeDiagonal(j, i, player) || isThereSignPositiveDiagonal(j, i, player)) {
           finalAnswer = true;
         }
       }
@@ -72,22 +72,24 @@ public class FieldVisualizer {
     return finalAnswer;
   }
 
-  public static boolean isPlayer(int column, int row) {
-    if (currentField[row][column] == 1) {
+  public static boolean isPlayer(int column, int row, String player) {
+    if (player.equals("p") && currentField[row][column] == 1) {
+      return true;
+    } else if (player.equals("c") && currentField[row][column] == 2) {
       return true;
     } else {
       return false;
     }
   }
 
-  public static boolean isThereSignHorizontal(int column, int row) {
+  public static boolean isThereSignHorizontal(int column, int row, String player) {
     int counter = 0;
     boolean finalAnswer = false;
     boolean[] result = new boolean[5];
     for (int i = 0; i < 5; i++) {
       if (isNotAllowed(column + i, row)) {
         result[i] = false;
-      } else if (isPlayer(column + i, row)) {
+      } else if (isPlayer(column + i, row, player)) {
         result[i] = true;
       } else {
         result[i] = false;
@@ -101,14 +103,14 @@ public class FieldVisualizer {
     return counter == 5;
   }
 
-  public static boolean isThereSignVertical(int column, int row) {
+  public static boolean isThereSignVertical(int column, int row, String player) {
     int counter = 0;
     boolean finalAnswer = false;
     boolean[] result = new boolean[5];
     for (int i = 0; i < 5; i++) {
       if (isNotAllowed(column, row + i)) {
         result[i] = false;
-      } else if (isPlayer(column, row + i)) {
+      } else if (isPlayer(column, row + i, player)) {
         result[i] = true;
       } else {
         result[i] = false;
@@ -122,14 +124,14 @@ public class FieldVisualizer {
     return counter == 5;
   }
 
-  public static boolean isThereSignPositiveDiagonal(int column, int row) {
+  public static boolean isThereSignPositiveDiagonal(int column, int row, String player) {
     int counter = 0;
     boolean finalAnswer = false;
     boolean[] result = new boolean[5];
     for (int i = 0; i < 5; i++) {
       if (isNotAllowed(column + i, row - i)) {
         result[i] = false;
-      } else if (isPlayer(column + i, row - i)) {
+      } else if (isPlayer(column + i, row - i, player)) {
         result[i] = true;
       } else {
         result[i] = false;
@@ -143,14 +145,14 @@ public class FieldVisualizer {
     return counter == 5;
   }
 
-  public static boolean isThereSignNegativeDiagonal(int column, int row) {
+  public static boolean isThereSignNegativeDiagonal(int column, int row, String player) {
     int counter = 0;
     boolean finalAnswer = false;
     boolean[] result = new boolean[5];
     for (int i = 0; i < 5; i++) {
       if (isNotAllowed(column + i, row + i)) {
         result[i] = false;
-      } else if (isPlayer(column + i, row + i)) {
+      } else if (isPlayer(column + i, row + i, player)) {
         result[i] = true;
       } else {
         result[i] = false;
