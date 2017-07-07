@@ -21,7 +21,7 @@ public class FieldVisualizer {
       }
       System.out.println();
     }
-    System.out.println("  - - - - - - - - - -");
+    System.out.println("  ¯ ¯ ¯ ¯ ¯ ¯ ¯ ¯ ¯ ¯");
   }
 
   public static void changeField(String column, String row, String player) {
